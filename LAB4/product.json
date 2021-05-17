@@ -20,7 +20,7 @@
         "JavaScript for kid":{
             "price": 15.99,
             "difficulty": "easy",
-            "img_location": "./JS_for_kid.jpg"
+            "img_location": "./JS_for_kid.png"
         }
     },
     "CSS": {
@@ -39,7 +39,7 @@
         "Effective TypeScript":{
             "price": 30.87,
             "difficulty": "medium",
-            "img_location": "./TS_effectiev.jpg"
+            "img_location": "./TS_effective.jpg"
         },
         "EAngular Projects":{
             "price": 34.99,
