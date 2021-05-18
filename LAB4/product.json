@@ -7,7 +7,7 @@
         },
         "Network Programming with Rust":{
             "price": 25.5,
-            "difficulty": "hart",
+            "difficulty": "hard",
             "img_location": "./RUST_network_programming.jpeg"
         }
     },
