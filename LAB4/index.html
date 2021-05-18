@@ -49,8 +49,23 @@
         product_json = json
         categorys = Object.keys(product_json)
         products = Object.keys(product_json[categorys[category_index]])
-        make_item()
-        make_item()
+        
+        let count = 0
+        while(window.innerHeight + window.scrollY >= document.body.offsetHeight && category_index < categorys.length && product_index < products.length){
+            let added = make_item()
+            if(added) count++
+        }
+        let added =false
+        if(count%2 == 1){
+            while(!added){
+                if(!(category_index < categorys.length && product_index < products.length)){
+                    break;
+                }
+                added = make_item()
+            }
+            
+        }
+        
     })
 
     function make_item(){
@@ -135,9 +150,19 @@
         if(fillter_category == 'ALL') category_index = 0
         product_container.innerHTML = ""
         let count = 0
-        while(count < 2 && category_index < categorys.length && product_index < products.length){
+        while(window.innerHeight + window.scrollY >= document.body.offsetHeight && category_index < categorys.length && product_index < products.length){
             let added = make_item()
             if(added) count++
+        }
+        let added =false
+        if(count%2 == 1){
+            while(!added){
+                if(!(category_index < categorys.length && product_index < products.length)){
+                    break;
+                }
+                added = make_item()
+            }
+            
         }
 
     }
