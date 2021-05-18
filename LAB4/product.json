@@ -41,7 +41,7 @@
             "difficulty": "medium",
             "img_location": "./TS_effective.jpg"
         },
-        "EAngular Projects":{
+        "Angular Projects":{
             "price": 34.99,
             "difficulty": "hard",
             "img_location": "./TS_Angular.jpg"

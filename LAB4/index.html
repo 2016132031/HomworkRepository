@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Study</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" type = "text/css" href = "main.css">
+</head>
+<body>
+    <div class = "head_container"><h1>Code study</h1></div>
+    <nav>
+        <a href="Index.html">Main Page</a>
+        <a href="login.html">Log In</a>
+        <a href="signup.html">Sign Up</a>
+    </nav>
+    <h2>BOOKS</h2> 
+    <label>Choose a category:</label>
+    <select name="category" id="category">
+        <option value="ALL">ALL</option>
+        <option value="Rust">RUST</option>
+        <option value="Java Script">Java Script</option>
+        <option value="CSS">CSS</option>
+        <option value="Type Script">Type Script</option>
+    </select>
+    <label>Enter search term:</label>
+    <input type="text" id="search" name="search"></input>
+    <button onClick = "adjust_fillter()">Filter ressults</button>
+    <div id = "product_container">
+    </div>
+    
+
+    
+</body>
+<script>
+    var product_json
+    var product_index = 0
+    var category_index = 0
+    var categorys
+    var products
+    var fillter_category = 'ALL'
+    var fillter_search = ''
+    var product_container
+    fetch('https://2016132031.github.io/HomeworkRepository/LAB4/product.json')
+    .then((res)=>{
+        return res.json();
+    }).then((json)=>{
+        product_container = document.getElementById('product_container')
+        product_json = json
+        categorys = Object.keys(product_json)
+        products = Object.keys(product_json[categorys[category_index]])
+        make_item()
+        make_item()
+    })
+
+    function make_item(){
+        let added = false
+        if(category_index < categorys.length && product_index < products.length){
+            let products = Object.keys(product_json[categorys[category_index]])
+            let product = products[product_index]
+            let category = categorys[category_index]
+            console.log(category)
+            let box = document.createElement('div')
+            box.classList.add("box")
+            let detail = document.createElement('div')
+            detail.classList.add("detail")
+            detail.innerHTML = "Click here<br>to detail"
+            let title = document.createElement('div')
+            title.classList.add("title")
+            title.innerHTML = product
+            let difficulty = document.createElement('div')
+            difficulty.classList.add("difficulty")
+            difficulty.innerHTML = "difficulty"
+            let innerdifficluty = document.createElement('div')
+            innerdifficluty.innerHTML = product_json[category][product].difficulty
+            difficulty.appendChild(innerdifficluty)
+            let price = document.createElement('div')
+            price.classList.add('price')
+            price.innerHTML = product_json[category][product].price + '$'
+            let img = document.createElement('img')
+            img.src = product_json[category][product].img_location
+            box.appendChild(detail)
+            box.appendChild(title)
+            box.appendChild(difficulty)
+            box.appendChild(price)
+            box.appendChild(img)
+            
+            if(product.toUpperCase().indexOf(fillter_search)>=0 ||product_json[category][product].difficulty.toUpperCase().indexOf(fillter_search)>=0){
+                product_container.appendChild(box)  
+                added = true  
+            }
+            
+            detail.onclick = function(el){
+                parent = el.target.parentNode;
+                children = parent.childNodes;
+                for(let i=1; i<4; i++){
+                    children[i].style.opacity = 1
+                }
+                
+            }
+            product_index++
+        }
+        if(fillter_category == 'ALL'){
+            if(product_index >= products.length){
+                category_index ++
+                product_index = 0
+                let products = Object.keys(product_json[categorys[category_index]])
+            }    
+        }
+        return added
+    }
+    window.onload = () =>{
+        window.onscroll = () =>{
+            if(window.innerHeight + window.scrollY >= document.body.offsetHeight){
+                let count = 0
+                while(count < 2 && category_index < categorys.length && product_index < products.length){
+                    let added = make_item()
+                    if(added) count++
+                }
+            }
+        }
+    }
+
+    function adjust_fillter(){
+        fillter_category = document.getElementById('category').value
+        fillter_search = document.getElementById('search').value.toUpperCase()
+        for(let i = 0; i<categorys.length; i++){
+            console.log(fillter_category, categorys)
+            if(fillter_category == categorys[i] ){
+                category_index = i
+                break;
+            }
+        }
+        product_index = 0
+        if(fillter_category == 'ALL') category_index = 0
+        product_container.innerHTML = ""
+        let count = 0
+        while(count < 2 && category_index < categorys.length && product_index < products.length){
+            let added = make_item()
+            if(added) count++
+        }
+
+    }
+
+    
+</script>
+</html>

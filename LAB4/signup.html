@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" type = "text/css" href = "main.css">
+    <title>signup</title>
+    
+
+</head>
+<body>
+    <p><h1>Code study sign up</h1></p>
+    <a href = "login.html">Log in</a> <a href = "signup.html">Sign up</a>
+    <div class = "form_container">
+        <form method = "GET" action = "./login.html">
+            <p>
+                <label>ID: <input name = "name" type = "text" required maxlength = "12" autofocus></label>
+            </p>
+            <p>
+                <label>Password: <input name = "password" type = "password" required placeholder = "password"> </label>
+            </p>
+            <p>
+                <label>Name: <input name = "name" type = "text" required autocomplete="on" placeholder="Kim"></label>
+            </p>
+            <p>
+                <label>Email: <input name = "email" type = "email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="example@example.com"> </label>
+            </p>
+            <p>
+                <label>Birth: <input name = "birth" type = "date" required> </label>
+            </p>
+            <p>
+                <input type = "submit" value = "Submit">
+                <input type = "reset" value = "Clear">
+                
+            </p>
+
+        </form>
+    </div>
+</body>
+</html>
